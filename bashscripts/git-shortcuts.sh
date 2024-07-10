@@ -62,11 +62,11 @@ EOL
 
 git-start-work() {
     # Setting variables for the personal and university folders
-    PERSONAL_DIR="$HOME/lucas"
+    PERSONAL_DIR="$HOME/andrade"
     UNIVERSITY_DIR="$HOME/university"
 
     # Setting variables for the configuration paths
-    PERSONAL_CONFIG="$HOME/.gitconfig_lucas"
+    PERSONAL_CONFIG="$HOME/.gitconfig_andrade"
     UNIVERSITY_CONFIG="$HOME/.gitconfig_university"
 
     # If the directories do not exist, create them and show a success message
