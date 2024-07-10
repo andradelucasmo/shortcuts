@@ -53,16 +53,27 @@ EOL
 EOL
 
     echo "* Git configuration completed successfully"
+    # Store the current directory
+    CURRENT_DIR=$(pwd)
 
     # Verify configuration in the personal directory
     cd "$PERSONAL_DIR"
     echo "* Verifying personal directory configuration"
+    mkdir personal-test-repo
+    cd personal-test-repo
     git config --list | grep user.name && git config --list | grep user.email
+    cd ..
+    rm -r personal-test-repo
 
     # Verify configuration in the university directory
     cd "$UNIVERSITY_DIR"
     echo "* Verifying university directory configuration"
+    mkdir university-test-repo
+    cd university-test-repo
     git config --list | grep user.name && git config --list | grep user.email
+    cd ..
+    rm -r university-test-repo
 
-    cd ~
+    # Return to the original directory
+    cd "$CURRENT_DIR"
 }
