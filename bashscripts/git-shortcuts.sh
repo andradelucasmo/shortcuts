@@ -1,15 +1,66 @@
-git-start() {
+# Import enviroment variables
+SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+source "$SCRIPT_DIR/gitconfig-env.sh"
 
-    # Setting personal information
-    WORK_NAME="<your-work-name>"
-    WORK_EMAIL="<your-work-email>"
+git-start-basic() {
+    git config --global user.name="$PERSONAL_NAME"
+    git config --global user.email="$PERSONAL_EMAIL"
+}
 
-    PERSONAL_NAME="<your-personal-name>"
-    PERSONAL_EMAIL="<your-personal-email>"
+git-add-config() {
+    # Verify if the three parameters are included
+    if [ "$#" -ne 3 ]; then
+        echo "Usage: git-add-config <name> <email> <base_name>"
+        return 1
+    fi
 
-    UNIVERSITY_NAME="<your-university-name>"
-    UNIVERSITY_EMAIL="<your-university-email>"
+    # Setting inserted information
+    NAME="$1"
+    EMAIL="$2"
+    BASE_NAME="$3"
 
+    # Setting directory and file names
+    CONFIG_DIR="$HOME/$BASE_NAME"
+    CONFIG_FILE="$HOME/.gitconfig_$BASE_NAME"
+
+    # If the directory does not exist, create it and show a success message
+    [ ! -d "$CONFIG_DIR" ] && mkdir -p "$CONFIG_DIR" && echo "* Created directory $CONFIG_DIR"
+
+    # Generate the configuration file for the new config
+    echo "* Configuring Git for $BASE_NAME"
+    cat > "$CONFIG_FILE" <<EOL
+[user]
+    name = "$NAME"
+    email = "$EMAIL"
+EOL
+
+    # Add new configuration to the .gitconfig file
+    echo "* Updating global .gitconfig"
+    {
+        echo
+        echo "[includeIf \"gitdir:$CONFIG_DIR/\"]"
+        echo "    path = $CONFIG_FILE"
+    } >> "$HOME/.gitconfig"
+
+    echo "* Git configuration for $BASE_NAME added successfully"
+
+    # Store the current directory
+    CURRENT_DIR=$(pwd)
+
+    # Verify configuration in the new directory
+    cd "$CONFIG_DIR"
+    echo "* Verifying $BASE_NAME directory configuration"
+    mkdir "$BASE_NAME-test-repo"
+    cd "$BASE_NAME-test-repo"
+    git config --list | grep user.name && git config --list | grep user.email
+    cd ..
+    rm -r "$BASE_NAME-test-repo"
+
+    # Return to the original directory
+    cd "$CURRENT_DIR"
+}
+
+git-start-work() {
     # Setting variables for the personal and university folders
     PERSONAL_DIR="$HOME/lucas"
     UNIVERSITY_DIR="$HOME/university"
