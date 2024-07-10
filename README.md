@@ -35,20 +35,15 @@ code ~/.bashrc
 
 3. Add shortcuts
 
-Remove `<your-path-to-bashscripts-shortcuts-folder>` and replace it with the absolute path to the folder that contains the bash shortcuts.
+Remove `<your-path-to-import-bashscripts>` and replace it with the absolute path to the file import-bashscripts.sh.
 
 ```bash
 # Your previous bashrc code
 
-# Define a variable for the folder path containing bash script shortcuts
-BASH_SCRIPTS_FOLDER=<your-path-to-bashscripts-shortcuts-folder>
+# Define a variable for the import-bashscripts.sh
+BASH_SCRIPTS_FOLDER=<your-path-to-import-bashscripts>
 # Import all bash script shortcut files
-for script in $BASH_SCRIPTS_FOLDER/*; do
-    if [ -f "$script" ]; then
-        echo "Importing $script" # You can remove this line after the first successful attempt
-        . "$script"
-    fi
-done
+source $BASH_SCRIPTS_FOLDER
 ```
 
 4. Restart the bash terminal or source the .bashrc file
@@ -89,29 +84,31 @@ You will see `Hello World!` in the bash terminal.
 
 1. Create an environment variables folder
 
-Create a folder named env inside the shortcuts folder, and inside this folder, create a .sh file named git-shortcuts-env.sh.
+Create inside the `*/shortcuts/src/git` folder, a file `.env.sh`
 
 OR
 
-Open the bash on the shortcuts folder
+Open the bash on the `*/shortcuts/src/git` folder
 
 ```bash
-mkdir -p env
-touch env/git-shortcuts-env.sh
+mkdir .env.sh
 ```
 
 2. Insert the code below in the environment file
 
 ```bash
 # Work information
+WORKS_FILE=""
 WORK_NAME=""
 WORK_EMAIL=""
 
 # Personal information
+PERSONAL_FILE=""
 PERSONAL_NAME=""
 PERSONAL_EMAIL=""
 
 # University information
+UNIVERSITY_FILE=""
 UNIVERSITY_NAME=""
 UNIVERSITY_EMAIL=""
 ```
@@ -159,6 +156,6 @@ Sets the default workstation config.
 
 Configures the global Git settings using the WORK_* variables.
 
-Creates two new .gitconfig_* files: one for personal Git settings using PERSONAL_* variables, and another for university Git settings using UNIVERSITY_* variables.
+Creates three new .gitconfig_* files: one for personal Git settings using PERSONAL_* variables, other for university Git settings using UNIVERSITY_* variables and the last one for work Git settings using WORK_* variables.
 
 ----
