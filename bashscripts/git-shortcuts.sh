@@ -63,4 +63,6 @@ EOL
     cd "$UNIVERSITY_DIR"
     echo "* Verifying university directory configuration"
     git config --list | grep user.name && git config --list | grep user.email
+
+    cd ~
 }
