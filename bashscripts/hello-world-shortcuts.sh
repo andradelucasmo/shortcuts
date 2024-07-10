@@ -1,0 +1,1 @@
+alias hello-world='echo "Hello World!"'
