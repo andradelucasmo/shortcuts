@@ -11,7 +11,7 @@
 
 # Base Configuration
 
-### Windows - Bash
+## Windows - Bash
 
 1. Open Git Bash
 
@@ -71,7 +71,7 @@ Hello World!
 
 # Hello World Shortcuts
 
-### hello-world
+## hello-world
 
 **Run:**
 
@@ -116,7 +116,7 @@ UNIVERSITY_NAME=""
 UNIVERSITY_EMAIL=""
 ```
 
-### git-start-basic
+## git-start-basic
 
 **Run:**
 
@@ -128,7 +128,7 @@ git-start-basic
 
 Configures the Git global settings, using PERSONAL_NAME and PERSONAL_EMAIL variables.
 
-### git-add-config
+## git-add-config
 
 **Run:**
 
@@ -145,7 +145,7 @@ Creates a folder, if it does not exist, named <base_name> in the home directory 
 
 Updates .gitconfig to include the configurations in .gitconfig_<base_name> when you are inside the folder ~/<base_name>.
 
-### git-start-work
+## git-start-work
 
 **Run:**
 
