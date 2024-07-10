@@ -1,6 +1,6 @@
 git-start() {
 
-    # Setting personal informations
+    # Setting personal information
     WORK_NAME="<your-work-name>"
     WORK_EMAIL="<your-work-email>"
 
@@ -10,11 +10,11 @@ git-start() {
     UNIVERSITY_NAME="<your-university-name>"
     UNIVERSITY_EMAIL="<your-university-email>"
 
-    # Setting variables to the personal and university folders
+    # Setting variables for the personal and university folders
     PERSONAL_DIR="$HOME/lucas"
     UNIVERSITY_DIR="$HOME/university"
 
-    # Setting variables to the configuration path
+    # Setting variables for the configuration paths
     PERSONAL_CONFIG="$HOME/.gitconfig_lucas"
     UNIVERSITY_CONFIG="$HOME/.gitconfig_university"
 
@@ -22,7 +22,7 @@ git-start() {
     [ ! -d "$PERSONAL_DIR" ] && mkdir -p "$PERSONAL_DIR" && echo "* Created directory $PERSONAL_DIR"
     [ ! -d "$UNIVERSITY_DIR" ] && mkdir -p "$UNIVERSITY_DIR" && echo "* Created directory $UNIVERSITY_DIR"
 
-    # Generate the code for the personal directory file
+    # Generate the configuration file for the personal directory
     echo "* Configuring Git for personal directory"
     cat > "$PERSONAL_CONFIG" <<EOL
 [user]
@@ -30,6 +30,7 @@ git-start() {
     email = "$PERSONAL_EMAIL"
 EOL
 
+    # Generate the configuration file for the university directory
     echo "* Configuring Git for university directory"
     cat > "$UNIVERSITY_CONFIG" <<EOL
 [user]
@@ -54,12 +55,12 @@ EOL
     echo "* Git configuration completed successfully"
 
     # Verify configuration in the personal directory
-    cd $PERSONAL_DIR
+    cd "$PERSONAL_DIR"
     echo "* Verifying personal directory configuration"
     git config --list | grep user.name && git config --list | grep user.email
 
     # Verify configuration in the university directory
-    cd $UNIVERSITY_DIR
+    cd "$UNIVERSITY_DIR"
     echo "* Verifying university directory configuration"
     git config --list | grep user.name && git config --list | grep user.email
 }
